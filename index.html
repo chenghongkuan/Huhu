@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2026 呼伦贝尔·大兴安岭金秋自驾攻略</title>
+    <meta
+      name="description"
+      content="2026年9月23日海拉尔落地、10月5日海拉尔返程的呼伦贝尔、阿尔山、漠河金秋自驾攻略。"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260826-static-map" />
+    <link rel="stylesheet" href="./vendor/leaflet/leaflet.css" />
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <nav class="topbar" aria-label="页面导航">
+        <a href="#verdict">方向判断</a>
+        <a href="#route">路线</a>
+        <a href="#itinerary">每日计划</a>
+        <a href="#weather">天气装备</a>
+        <a href="#booking">预订</a>
+      </nav>
+      <div class="hero__shade"></div>
+      <div class="hero__content">
+        <p class="eyebrow">2026.09.23 中午抵达海拉尔 - 2026.10.05 中午海拉尔返程</p>
+        <h1>呼伦贝尔·大兴安岭金秋自驾</h1>
+        <p class="hero__lead">
+          顺时针走：海拉尔取车，先南下阿尔山，再沿满洲里、黑山头、室韦、莫尔道嘎进入漠河，最后经根河、额尔古纳、莫日格勒河回海拉尔。
+        </p>
+        <div class="hero__facts" aria-label="行程摘要">
+          <span>12晚13天</span>
+          <span>高德约 3,175 km</span>
+          <span>国庆前完成热门西线</span>
+          <span>10月4日回海拉尔</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section verdict" id="verdict">
+        <div class="section__header">
+          <p class="eyebrow">Route Decision</p>
+          <h2>结论：顺时针，前紧后松</h2>
+          <p>
+            这次不是单纯追最早变黄的地方，而是在秋色、人流、天气和返程航班之间做平衡。9月底先走阿尔山、满洲里、边境线，国庆后半段回到海拉尔更稳。
+          </p>
+        </div>
+        <div class="decision-grid decision-grid--single">
+          <article class="decision-card decision-card--primary">
+            <div class="decision-card__top">
+              <span class="badge">推荐执行</span>
+              <h3>海拉尔起终点闭环</h3>
+            </div>
+            <p class="score">国庆前完成热门西线，返程前一晚回海拉尔</p>
+            <ul>
+              <li>9月23-30日先走阿尔山、满洲里、黑山头、室韦、莫尔道嘎和白鹿岛，把金秋森林时间留足。</li>
+              <li>10月1日短进漠河休整补给，10月2日把北红村、北极村和龙江第一湾合成一日大环线。</li>
+              <li>10月4日回到海拉尔，10月5日中午航班不会被阿尔山山路或长距离返程卡住。</li>
+              <li>阿尔山和大兴安岭9月下旬到10月上旬仍在赏秋窗口内，整体不至于错过金黄。</li>
+            </ul>
+          </article>
+        </div>
+        <div class="holiday-strip" aria-label="2026假期节奏">
+          <div>
+            <strong>9/23-9/24</strong>
+            <span>错峰进入</span>
+          </div>
+          <div class="holiday">
+            <strong>9/25-9/27</strong>
+            <span>中秋小长假</span>
+          </div>
+          <div>
+            <strong>9/28-9/30</strong>
+            <span>夹心工作日，适合跑边境线</span>
+          </div>
+          <div class="holiday holiday--hot">
+            <strong>10/01-10/07</strong>
+            <span>国庆黄金周</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="route section" id="route">
+        <div class="section__header">
+          <p class="eyebrow">AMap Route</p>
+          <h2>主线走法 + 逐日行程</h2>
+          <p>左侧保留高德地图并跟随本段滚动；右侧按天展开行程，点击任意一天会在地图中高亮当天驾车路线。</p>
+        </div>
+        <div class="route-layout route-layout--amap">
+          <div class="amap-shell">
+            <div id="amap-roadtrip" class="amap-container" aria-label="高德地图路线"></div>
+            <div class="amap-setup" id="amapSetup">
+              <div>
+                <strong>高德底图（可选）</strong>
+                <p>网站默认显示已保存的高德驾车道路数据，不含任何 key。输入 Web端 JSAPI key 仅用于切换到高德底图，key 只保存在当前浏览器。</p>
+              </div>
+              <div class="amap-setup__fields">
+                <input id="amapKeyInput" type="password" autocomplete="off" placeholder="高德 Web端 JSAPI Key" />
+                <input id="amapSecurityInput" type="password" autocomplete="off" placeholder="安全密钥 securityJsCode（可选）" />
+                <input id="amapRouteKeyInput" type="password" autocomplete="off" placeholder="Web服务 Key（仅本机更新路线时需要）" />
+                <button id="amapLoadBtn" type="button">加载高德底图</button>
+              </div>
+            </div>
+            <div class="map-status" id="mapStatus">正在检查本机高德配置</div>
+            <div class="route-color-legend" id="routeColorLegend" aria-label="每日路线颜色"></div>
+          </div>
+          <aside class="route-panel route-panel--live">
+            <div class="route-summary">
+              <span class="badge">主线</span>
+            <h3>海拉尔 - 柴河 - 阿尔山国家森林公园 - 阿尔山 - 满洲里 - 186彩带河 - 腾达马场 - 黑山头 - 室韦 - 莫尔道嘎 - 白鹿岛 - 伊克萨玛 - 凝翠山 - 满归 - 漠河 - 北极村 - 根河 - 海拉尔</h3>
+              <p>路线只使用高德驾车规划返回的道路坐标；每个时段的导航目的地会落到左侧地图里，沿途可选支线用虚线标出。</p>
+            </div>
+            <ol class="route-list route-list--active">
+              <li>海拉尔</li>
+              <li>博克图站</li>
+              <li>柴河月亮小镇</li>
+              <li>柴河月亮小镇</li>
+              <li>十大湾 / 柴河月亮天池</li>
+              <li>阿尔山国家森林公园</li>
+              <li>五里泉 / 阿尔山火车站</li>
+              <li>阿兰度森林温泉小镇</li>
+              <li>玫瑰峰 / 七仙湖第一湖</li>
+              <li>呼伦湖金海岸 / 猛犸景区</li>
+              <li>国门 / 套娃广场</li>
+              <li>186彩带河</li>
+              <li>腾达马场 / 向北方居</li>
+              <li>乌兰山</li>
+              <li>七卡 / 九卡 / 室韦</li>
+              <li>老鹰嘴 / 太平村</li>
+              <li>莫尔道嘎</li>
+              <li>白鹿岛 / 伊克萨玛 / 凝翠山</li>
+              <li>满归</li>
+              <li>漠河市区三点 / 北极村</li>
+              <li>北红村 / 乌苏里浅滩 / 龙江第一湾</li>
+              <li>九曲十八湾 / 漠河</li>
+              <li>漠河</li>
+              <li>满归 / 根河源湿地 / 根河</li>
+              <li>敖鲁古雅 / 额尔古纳湿地 / 莫日格勒河</li>
+              <li>海拉尔</li>
+            </ol>
+            <div class="route-actions">
+              <button id="showFullRouteBtn" type="button">显示全程</button>
+              <button id="editAmapConfigBtn" type="button">更新高德Key</button>
+              <a id="openAmapLink" href="https://uri.amap.com/" target="_blank" rel="noreferrer">高德打开</a>
+            </div>
+            <div class="route-note">
+              <h3>执行原则</h3>
+              <p>除 D1 抵达和 D13 返程外，每天按 10:00 出发安排。夜里回酒店可以接受，但景点尽量在天亮时看完；虚线支线不计入主线时间，只有天气、体力和路况都顺才加。</p>
+            </div>
+            <div class="daily-panel" id="itinerary">
+              <div class="daily-panel__header">
+                <p class="eyebrow">Daily Plan</p>
+                <h3>逐日行程</h3>
+                <p>每一行代表一天。里程和车程来自高德驾车规划；卡片里的时段目的地都已加入地图路线点，不含景区内部交通。</p>
+              </div>
+              <div class="daily-list" id="timeline">
+          <article class="day-card" data-day="1" data-risk="low" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-01.jpg" alt="海拉尔与呼伦贝尔草原城市入口景观" />
+              <a href="https://ak-d.tripcdn.com/images/10081f000001gqgw241D9.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D1 · 9月23日 周三</div>
+              <h3>抵达海拉尔，入住初青·茶设计师酒店</h3>
+              <p class="drive">高德约 7.1 km｜18分钟</p>
+              <p>中午落地后取车，先到已订的初青·茶设计师酒店放行李，再在古城片区完成午餐和补给。酒店位于正阳街道联合路93号，第二天从这里直接向博克图出发。</p>
+              <ol class="day-plan" aria-label="D1时间安排">
+              <li><time>12:30</time><span>海拉尔机场落地、取行李</span><em>约30分钟，按中午抵达预估</em></li>
+              <li><time>13:10</time><span>取车验车、拍照留档</span><em>约50分钟，重点看胎压、备胎、玻璃水、防滑链</em></li>
+              <li><time>14:00</time><span>前往初青·茶设计师酒店</span><em>高德约18分钟，导航至正阳街道联合路93号</em></li>
+              <li><time>14:20</time><span>酒店办理入住 / 放行李</span><em>约25分钟，确认次日出发前停车和早餐安排</em></li>
+              <li><time>14:45</time><span>古城片区午餐</span><em>约1小时，酒店靠近呼伦贝尔古城和伊仕丹购物广场</em></li>
+              <li><time>16:00</time><span>超市补给和车载装备采购</span><em>约1小时，买水、干粮、保温杯、暖宝宝</em></li>
+              <li><time>17:15</time><span>呼伦贝尔古城 / 伊敏河边散步</span><em>约50分钟，作为落地适应和轻松拍照</em></li>
+              </ol>
+            <p class="sleep">住：初青·茶设计师酒店（呼伦贝尔海拉尔古城店）｜携程已订</p>
+          </article>
+          <article class="day-card" data-day="2" data-risk="mid" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-02.jpg" alt="柴河月亮小镇秋季山水" />
+              <a href="https://newbbs-fd.zol-img.com.cn/t_s800x2000/g2/M00/0F/0C/ChMlWl0Da6yIRaQ9ADcYZD5Wg-cAAK4rwM4l-MANxh8616.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D2 · 9月24日 周四</div>
+            <h3>海拉尔到扎兰屯柴河赫家酒店</h3>
+            <p class="drive">高德约 438 km｜7小时38分</p>
+            <p>10点出发后的长距离日。只把博克图铁路小镇作为顺路短停，傍晚入住已订的柴河赫家酒店；十大湾挪到D3上午白天看。</p>
+            <ol class="day-plan" aria-label="D2时间安排">
+              <li><time>10:00</time><span>初青·茶设计师酒店出发，进大兴安岭方向</span><em>到博克图高德约3小时08分，早餐和咖啡提前买好</em></li>
+              <li><time>13:08</time><span>博克图站 / 铁路小镇外观</span><em>约20分钟，中东铁路旧站房、小镇街景，顺路小众点</em></li>
+              <li><time>13:28</time><span>博克图出发去柴河赫家酒店</span><em>高德约4小时31分，午餐按路餐或安全服务点解决</em></li>
+              <li><time>17:59</time><span>扎兰屯柴河赫家酒店入住 / 晚餐</span><em>导航至柴河镇望月路与心悦街交叉口西侧；今天不再去十大湾，天黑后只做镇内散步和补给</em></li>
+              <li><time>19:00</time><span>整理第二天进山装备</span><em>确认月亮天池、阿尔山森林公园路况，给D3留体力</em></li>
+            </ol>
+            <p class="sleep">住：扎兰屯柴河赫家酒店｜去哪儿已订</p>
+          </article>
+          <article class="day-card" data-day="3" data-risk="mid" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-03.jpg" alt="阿尔山国家森林公园金秋湖泊与落叶松" />
+              <a href="https://www.rmdbw.cn/pic/2025-09/30/69536_cade07f6-f083-46f1-9fc1-6e0b16fb6ba2.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D3 · 9月25日 周五 · 中秋假期</div>
+            <h3>柴河赫家酒店短进阿尔山国家森林公园</h3>
+            <p class="drive">高德约 216 km｜3小时43分</p>
+            <p>从赫家酒店先短进十大湾，再进月亮天池和阿尔山国家森林公园。晚上住已订的阿兰度森林温泉小镇，在白狼镇森林里直接泡温泉。</p>
+            <ol class="day-plan" aria-label="D3时间安排">
+              <li><time>10:00</time><span>柴河赫家酒店出发</span><em>到柴河大桥 / 十大湾高德约4分钟</em></li>
+              <li><time>10:04</time><span>柴河大桥 / 十大湾</span><em>约35分钟，白天看绰尔河河湾和林线，不再安排傍晚补拍</em></li>
+              <li><time>10:39</time><span>出发去柴河月亮天池</span><em>高德约38分钟，山区慢行</em></li>
+              <li><time>11:17</time><span>柴河月亮天池景区</span><em>约35分钟，火山湖和林线轻拍，把体力留给森林公园</em></li>
+              <li><time>11:52</time><span>出发去阿尔山国家森林公园</span><em>高德约1小时20分，途中路餐</em></li>
+              <li><time>13:12</time><span>阿尔山国家森林公园</span><em>约3小时30分钟，天池、三潭峡、石塘林或杜鹃湖择二到三处</em></li>
+              <li><time>16:42</time><span>出发去五里泉</span><em>高德约53分钟，先补水再去火车站</em></li>
+              <li><time>17:35</time><span>五里泉</span><em>约12分钟，补水和轻拍</em></li>
+              <li><time>17:47</time><span>出发去阿尔山火车站</span><em>高德约7分钟</em></li>
+              <li><time>17:54</time><span>阿尔山火车站</span><em>约20分钟，日式小站外观和站前街景</em></li>
+              <li><time>18:14</time><span>前往阿兰度森林温泉小镇</span><em>高德约40分钟，前往白狼镇桃源新村</em></li>
+              <li><time>18:54</time><span>阿兰度森林温泉小镇入住 / 晚餐 / 温泉</span><em>抖音已订；晚间直接泡温泉，住宿与温泉不再分开往返</em></li>
+            </ol>
+            <p class="sleep">住：阿兰度森林温泉小镇｜抖音已订</p>
+          </article>
+          <article class="day-card" data-day="4" data-risk="high" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-04.jpg" alt="满洲里国门与边境城市景观" />
+              <a href="https://img1.qunarzz.com/travel/d9/1505/10/eb1722dd4599f5.jpg_r_720x480x95_ae7d30a2.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D4 · 9月26日 周六</div>
+            <h3>阿兰度经七仙湖走呼伦湖西岸到满洲里</h3>
+            <p class="drive">高德约 543 km｜8小时03分</p>
+            <p>白狼镇出发比阿尔山市区更远。玫瑰峰后增加七仙湖第一湖作为中段草原湖泊停靠，再沿西侧方向到呼伦湖金海岸；为在夜路前抵达满洲里，今天三处停留均改为精简拍照。</p>
+            <ol class="day-plan" aria-label="D4时间安排">
+              <li><time>10:00</time><span>阿兰度森林温泉小镇出发</span><em>到玫瑰峰高德约1小时04分，早餐和补油在白狼镇或沿途解决</em></li>
+              <li><time>11:00</time><span>玫瑰峰</span><em>约20分钟，火山岩山体和草原过渡景观，今天不久留</em></li>
+              <li><time>11:20</time><span>出发去七仙湖第一湖</span><em>高德约1小时15分，沿草原公路前进</em></li>
+              <li><time>12:35</time><span>七仙湖第一湖旅游景区</span><em>约35分钟，草原湖泊、湿地和秋色，午餐以路餐解决</em></li>
+              <li><time>13:10</time><span>出发去呼伦湖金海岸</span><em>高德约3小时31分，午餐按路餐或安全停车点解决</em></li>
+              <li class="day-plan__optional"><time>备选</time><span>虚线支线：诺门罕 / 甘珠尔庙</span><em>七仙湖后可串诺门罕战役遗址陈列馆、甘珠尔庙再去呼伦湖，比直达呼伦湖约多25分钟，不含参观。常见开放时间：诺门罕 08:00-18:30、18:00停止入馆；甘珠尔庙 08:00-18:00、18:00停止入园。若 15:30 后还没到庙，直接放弃。</em></li>
+              <li><time>16:41</time><span>呼伦湖金海岸</span><em>约20分钟，西岸湖景、草原湖岸和风浪，风大加衣</em></li>
+              <li><time>17:01</time><span>出发去扎赉诺尔猛犸旅游景区</span><em>高德约1小时49分，沿呼伦湖西北侧进扎赉诺尔</em></li>
+              <li><time>18:50</time><span>扎赉诺尔猛犸旅游景区</span><em>约10分钟，仅外观快速拍照；若天色已暗，直接去酒店</em></li>
+              <li><time>19:00</time><span>维也纳智好酒店入住 / 晚餐</span><em>从猛犸景区高德约28分钟，预计19:28到达；酒店位于满洲里二道街116号</em></li>
+            </ol>
+            <p class="sleep">住：维也纳智好酒店（内蒙古满洲里中苏金街店）｜飞猪已订</p>
+          </article>
+          <article class="day-card" data-day="5" data-risk="mid" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-05.jpg" alt="黑山头日落与草原河谷" />
+              <a href="https://ak-d.tripcdn.com/images/1mi1d12000nkgijwtD6DE.jpg?proc=source%2Ftrip" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D5 · 9月27日 周日 · 中秋假期</div>
+            <h3>满洲里经186彩带河到腾达马场湿地野骑</h3>
+            <p class="drive">高德约 232 km｜3小时42分</p>
+            <p>从维也纳智好酒店出发，先看国门和套娃广场，再沿东北方向经186彩带河到腾达马场野骑，晚上住已订的向北方居。</p>
+            <ol class="day-plan" aria-label="D5时间安排">
+              <li><time>10:00</time><span>维也纳智好酒店出发去国门景区</span><em>高德约19分钟，国庆前后排队时只看核心点</em></li>
+              <li><time>10:19</time><span>满洲里国门景区</span><em>约30分钟，口岸和国门外观拍照</em></li>
+              <li><time>10:49</time><span>出发去套娃广场</span><em>高德约14分钟</em></li>
+              <li><time>11:03</time><span>套娃广场</span><em>约30分钟，外观和广场拍照</em></li>
+              <li><time>11:33</time><span>满洲里午餐 / 补油 / 出城准备</span><em>约30分钟，出城前加满油，带好骑马外套</em></li>
+              <li><time>12:03</time><span>出发去186彩带河</span><em>高德约2小时06分，午后沿边境方向前进</em></li>
+              <li><time>14:09</time><span>186彩带河</span><em>约25分钟，草原河曲和观景台轻拍</em></li>
+              <li><time>14:34</time><span>出发去腾达马场</span><em>高德约58分钟，直达湿地野骑集合点</em></li>
+              <li><time>15:32</time><span>腾达马场湿地野骑</span><em>约3小时05分钟，进湿地骑马，注意防风和手套</em></li>
+              <li><time>18:37</time><span>前往向北方居入住</span><em>高德约4分钟；按登记地址“黑山头镇新镇28幢32号”导航</em></li>
+              <li><time>18:41</time><span>向北方居办理入住</span><em>放行李、换保暖层；晚餐可在民宿或黑山头镇内安排</em></li>
+              <li class="day-plan__optional"><time>备选</time><span>虚线支线：黑山头日落观测点</span><em>入住向北方居后若天气通透，可去日落观测点再返回民宿，高德往返约15分钟；骑马结束晚或风太大就不加。</em></li>
+              <li><time>19:20</time><span>黑山头晚餐 / 休整</span><em>不追日落就直接吃饭收束；若去日落点，晚餐顺延</em></li>
+            </ol>
+            <p class="sleep">住：向北方居·View star观星·原野美宿（额尔古纳黑山头镇店）｜携程已订</p>
+          </article>
+          <article class="day-card" data-day="6" data-risk="mid" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-06.jpg" alt="临江室韦额尔古纳河秋色" />
+              <a href="https://dimg04.c-ctrip.com/images/0101112000f832yc2AC4D_W_750_0.jpg?proc=autoorient" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D6 · 9月28日 周一</div>
+            <h3>黑山头沿六卡、七卡、八卡北上室韦</h3>
+            <p class="drive">高德约 166 km｜3小时11分</p>
+            <p>15:23入住偏早，不该把这段卡线只当成通勤。正式加入六卡乌兰山驿站、八卡岛和室韦口岸，沿额尔古纳河一路慢拍，17:22再入住已订的萨沙之家。</p>
+            <ol class="day-plan" aria-label="D6时间安排">
+              <li><time>10:00</time><span>向北方居出发，进入边境线</span><em>到六卡乌兰山驿站高德约1小时02分，边防路弯多慢行</em></li>
+              <li><time>11:02</time><span>六卡乌兰山驿站 / 界河停车湾</span><em>约25分钟，先在安全停车点看湿地草原和额尔古纳河</em></li>
+              <li><time>11:27</time><span>出发去乌兰山太极湾</span><em>高德约19分钟</em></li>
+              <li><time>11:46</time><span>乌兰山太极湾</span><em>约50分钟，俯瞰太极河湾与金色牧场</em></li>
+              <li><time>12:36</time><span>出发去七卡村</span><em>高德约22分钟，沿界河边境路北上</em></li>
+              <li><time>12:58</time><span>七卡村慢拍 / 午餐</span><em>约1小时，草原河曲、路餐和休息一起解决</em></li>
+              <li class="day-plan__optional"><time>替代</time><span>虚线内线：恩和 / 哈乌尔河</span><em>地图已从七卡经恩和、哈乌尔河景区绘制至室韦口岸。卡线封路、雨雪或不想走边境路时走这条；游玩会多约1小时50分到2小时15分。</em></li>
+              <li><time>13:58</time><span>出发去八卡岛</span><em>高德约23分钟，七卡至八卡是卡线精华段</em></li>
+              <li><time>14:21</time><span>八卡岛 / 界河 S 弯</span><em>约30分钟，草原波浪线、白桦和界河取景</em></li>
+              <li><time>14:51</time><span>出发去九卡</span><em>高德约26分钟，落叶路段慢行</em></li>
+              <li><time>15:17</time><span>九卡咖啡 / 补给</span><em>约35分钟，补热水并短暂休息</em></li>
+              <li><time>15:52</time><span>出发去中国室韦口岸</span><em>高德约38分钟，进入室韦镇前最后一段界河公路</em></li>
+              <li><time>16:30</time><span>中国室韦口岸外观 / 中俄友谊桥</span><em>约50分钟，傍晚光线拍口岸与对岸俄罗斯村庄；不进入管制区</em></li>
+              <li><time>17:20</time><span>前往室韦萨沙之家</span><em>高德约2分钟，导航至室韦镇11-10-14号</em></li>
+              <li><time>17:22</time><span>室韦萨沙之家入住</span><em>去哪儿已订；晚餐后休整，给第二天森林小路留体力</em></li>
+              <li><time>18:30</time><span>室韦晚餐 / 界河散步</span><em>晚上不再开远路，检查次日林区油量与保暖层</em></li>
+            </ol>
+            <p class="sleep">住：额尔古纳市室韦萨沙之家｜去哪儿已订</p>
+          </article>
+          <article class="day-card" data-day="7" data-risk="low" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-07.jpg" alt="莫尔道嘎和白鹿岛五花山秋色" />
+              <a href="https://p2.cri.cn/M00/66/25/rBABCmMpHraAETyDAAAAAAAAAAA554.9417x5216.750x416.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D7 · 9月29日 周二</div>
+            <h3>室韦穿行月亮泡子与莫尔道嘎森林</h3>
+            <p class="drive">高德约 128 km｜3小时33分</p>
+            <p>15:17入住确实偏早，正式加入月亮泡子和莫尔道嘎国家森林公园。10点出发、16:59入住，核心林区游玩仍安排在天黑前。</p>
+            <ol class="day-plan" aria-label="D7时间安排">
+              <li><time>10:00</time><span>室韦萨沙之家出发</span><em>到老鹰嘴高德约40分钟，路窄慢行</em></li>
+              <li><time>10:40</time><span>老鹰嘴观景点</span><em>约30分钟，小众岩壁、河谷和秋色</em></li>
+              <li><time>11:10</time><span>出发去月亮泡子</span><em>高德约20分钟，林间小路按路况慢行</em></li>
+              <li><time>11:30</time><span>月亮泡子</span><em>约15分钟，看牛轭湖与界河；雨后路软则短停即走</em></li>
+              <li><time>11:45</time><span>出发去太平村</span><em>高德约14分钟</em></li>
+              <li><time>11:59</time><span>太平村老屋和林间小路</span><em>约1小时，午餐加村落慢拍</em></li>
+              <li><time>12:59</time><span>出发去莫尔道嘎龙山公园</span><em>高德约56分钟</em></li>
+              <li><time>13:55</time><span>莫尔道嘎龙山公园</span><em>约40分钟，镇边林地和五花山取景</em></li>
+              <li><time>14:35</time><span>出发去莫尔道嘎国家森林公园</span><em>高德约49分钟</em></li>
+              <li><time>15:24</time><span>莫尔道嘎国家森林公园</span><em>约1小时，短步行或园内林道观景；16:24前离开，确保自然光</em></li>
+              <li><time>16:24</time><span>出发去莫尔道嘎龙运宾馆</span><em>高德约35分钟，酒店在蒙古王饭店附近</em></li>
+              <li><time>16:59</time><span>莫尔道嘎龙运宾馆入住</span><em>去哪儿已订；晚餐后休整，给第二天白鹿岛留体力</em></li>
+              <li><time>18:00</time><span>晚餐 / 镇内补给</span><em>检查油量、保暖层和相机电池，明早仍按10点出发</em></li>
+            </ol>
+            <p class="sleep">住：莫尔道嘎龙运宾馆｜去哪儿已订</p>
+          </article>
+          <article class="day-card" data-day="8" data-risk="mid" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-08.jpg" alt="白鹿岛到满归的大兴安岭林区公路" />
+              <a href="https://p5.itc.cn/q_70/images01/20210706/4bfbcc2d88ba49acaafb6c30cac54d98.jpeg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D8 · 9月30日 周三</div>
+            <h3>白鹿岛、伊克萨玛原始林与凝翠山蓝调</h3>
+            <p class="drive">高德约 252 km｜4小时54分</p>
+            <p>伊克萨玛仍是今天的森林重头戏：白鹿岛之后直接进园，把激流河、山谷湿地和原始针叶林留在自然光里；凝翠山放在傍晚，作为满归镇景的蓝调收尾。</p>
+            <ol class="day-plan" aria-label="D8时间安排">
+              <li><time>10:00</time><span>莫尔道嘎龙运宾馆出发去白鹿岛</span><em>高德约1小时41分钟，沿激流河行驶，落叶多慢行</em></li>
+              <li><time>11:41</time><span>白鹿岛 / 激流河河谷</span><em>约1小时30分钟，今天第一处核心慢拍点</em></li>
+              <li><time>13:11</time><span>白鹿岛路餐 / 热水休息</span><em>约28分钟，餐饮不稳定，建议自备干粮</em></li>
+              <li><time>13:39</time><span>出发去伊克萨玛国家森林公园</span><em>高德约2小时19分钟，林区无信号且补给稀少，途中只在安全宽阔处短停</em></li>
+              <li><time>15:58</time><span>伊克萨玛国家森林公园</span><em>约1小时10分钟，看激流河、伊克萨玛大桥与针叶林河谷；15:58-17:08保留给森林自然光</em></li>
+              <li><time>17:08</time><span>出发去凝翠山公园</span><em>高德约39分钟，山路继续慢行</em></li>
+              <li><time>17:47</time><span>凝翠山公园日落 / 蓝调镇景</span><em>约45分钟，只走可见台阶与近处观景位；987级台阶天暗后不强登，必须带头灯</em></li>
+              <li><time>18:32</time><span>出发去满归镇佳辰宾馆</span><em>高德约15分钟，第二天进漠河前必须确认油量</em></li>
+              <li><time>18:47</time><span>满归镇佳辰宾馆入住 / 补油</span><em>去哪儿已订；沿河街向阳巷93号，晚餐和休整，整理相机、电池和保暖层。此时在去哪儿复查10月4日入住的“隐居繁华庄园（海拉尔机场店）”价格，若仍可免费取消且降价则重订</em></li>
+            </ol>
+            <p class="sleep">住：满归镇佳辰宾馆｜去哪儿已订</p>
+          </article>
+          <article class="day-card" data-day="9" data-risk="low" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-08.jpg" alt="满归到漠河的大兴安岭林区公路" />
+              <a href="https://p5.itc.cn/q_70/images01/20210706/4bfbcc2d88ba49acaafb6c30cac54d98.jpeg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D9 · 10月1日 周四 · 国庆</div>
+            <h3>满归到漠河市区，再住北极村锦江之星</h3>
+            <p class="drive">高德约 217 km｜3小时22分</p>
+            <p>把原本很轻的D9用来前置北极村：中午到漠河补给、短看市区三点，下午赶到北极村，保证找北地标在天亮时完成。</p>
+            <ol class="day-plan" aria-label="D9时间安排">
+              <li><time>10:00</time><span>满归镇佳辰宾馆出发去漠河</span><em>高德约2小时09分，今天把北极村提前完成</em></li>
+              <li><time>12:09</time><span>漠河市区午餐 / 补油</span><em>约40分钟，采购D10大环路餐和热水</em></li>
+              <li><time>12:49</time><span>出发去松苑公园</span><em>高德约1分钟</em></li>
+              <li><time>12:50</time><span>松苑公园</span><em>约25分钟，市区内原始林小环线</em></li>
+              <li><time>13:15</time><span>出发去大兴安岭五六火灾纪念馆</span><em>高德约2分钟</em></li>
+              <li><time>13:17</time><span>大兴安岭五六火灾纪念馆</span><em>约35分钟，快速了解漠河城市背景</em></li>
+              <li><time>13:52</time><span>出发去北极星广场 / 漠河舞厅</span><em>高德约7分钟</em></li>
+              <li><time>13:59</time><span>北极星广场 / 漠河舞厅外观</span><em>约20分钟，轻松城市短停</em></li>
+              <li class="day-plan__optional"><time>备选</time><span>虚线支线：胭脂沟 / 李金镛祠堂</span><em>漠河市区三点后，可顺路绕胭脂沟、李金镛祠堂再去北极村，高德约多21分钟，不含参观；若北极村住宿入园手续复杂，优先直达酒店。</em></li>
+              <li><time>14:19</time><span>出发去锦江之星北极村店</span><em>高德约1小时03分，国庆期间提前确认住宿和车辆进入规则</em></li>
+              <li><time>15:22</time><span>锦江之星北极村店入住 / 找北地标</span><em>去哪儿已订；酒店在中国最北邮局东北约85米，约2小时走北极沙洲、最北邮局、最北哨所重点</em></li>
+              <li><time>18:00</time><span>北极村晚餐 / 夜间休整</span><em>晚饭后可散步，不再把核心景点留到黑天</em></li>
+            </ol>
+            <p class="sleep">住：锦江之星酒店（漠河北极村中国最北邮局店）｜去哪儿已订</p>
+          </article>
+          <article class="day-card" data-day="10" data-risk="high" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-10.jpg" alt="北极村中国最北邮局与极北地标" />
+              <a href="https://resource.beijicunlvyou.com/file-bucket/21baecb369dd473e952e3d2be648da5f.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D10 · 10月2日 周五 · 国庆</div>
+            <h3>北极村反向大环回漠河麗枫</h3>
+            <p class="drive">高德约 300 km｜5小时13分</p>
+            <p>从北极村反向跑大环，先去北红村、乌苏里浅滩和龙江第一湾，最后用九曲十八湾收尾回漠河麗枫。核心景点尽量都在日落前完成。</p>
+            <ol class="day-plan" aria-label="D10时间安排">
+              <li><time>10:00</time><span>锦江之星北极村店出发，带热水和路餐</span><em>到北红村高德约1小时55分，今天不再赶北极村景点</em></li>
+              <li><time>11:55</time><span>北红村短停</span><em>约25分钟，村口界江和补给；天气差可直接砍掉</em></li>
+              <li><time>12:20</time><span>出发去乌苏里浅滩</span><em>高德约14分钟，午餐按路餐解决</em></li>
+              <li><time>12:34</time><span>乌苏里浅滩</span><em>约20分钟，最北点和界江拍照</em></li>
+              <li><time>12:54</time><span>出发去龙江第一湾</span><em>高德约17分钟，赶在下午核心时段登高</em></li>
+              <li><time>13:11</time><span>龙江第一湾登高</span><em>约1小时15分钟，爬坡耗体力，风大加衣</em></li>
+              <li><time>14:26</time><span>出发去九曲十八湾</span><em>高德约2小时26分，下午光线更适合河谷层次</em></li>
+              <li><time>16:52</time><span>九曲十八湾</span><em>约30分钟，日落前后看河谷，天色差就缩短</em></li>
+              <li><time>17:22</time><span>返回麗枫酒店入住</span><em>从九曲十八湾高德约22分钟，夜里只做吃饭休整</em></li>
+            </ol>
+            <p class="sleep">住：麗枫酒店（北极星广场松苑公园店）｜飞猪已订</p>
+          </article>
+          <article class="day-card" data-day="11" data-risk="high" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-12.jpg" alt="根河源湿地与大兴安岭返程秋色" />
+              <a href="https://pic1.nmgnews.com.cn/003/009/526/00300952653_fcc6b271.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D11 · 10月3日 周六 · 国庆</div>
+            <h3>漠河麗枫经满归返根河源 / 静林山庄</h3>
+            <p class="drive">高德约 377 km｜6小时16分</p>
+            <p>返程最硬的一天。10点从麗枫酒店出发，经佳辰宾馆所在的满归镇回到根河源湿地和根河；驯鹿体验挪到D12上午，避免16点后才赶到敖鲁古雅。</p>
+            <ol class="day-plan" aria-label="D11时间安排">
+              <li><time>10:00</time><span>麗枫酒店出发返程</span><em>到满归高德约2小时21分，林区路段按天气和路面慢行</em></li>
+              <li><time>12:21</time><span>佳辰宾馆附近午餐 / 补油</span><em>约45分钟，检查路况、胎压和防滑链</em></li>
+              <li><time>13:06</time><span>出发去根河源湿地</span><em>高德约3小时26分，林区长距离穿越，少停靠</em></li>
+              <li><time>16:32</time><span>根河源国家湿地公园</span><em>约45分钟，短停看湿地秋色；路况差则取消，直接住根河</em></li>
+              <li><time>17:17</time><span>出发去根河静林山庄酒店</span><em>高德约29分钟，黄昏前完成最后一段</em></li>
+              <li><time>17:46</time><span>根河静林山庄酒店入住 / 晚餐</span><em>去哪儿已订；铁峰巷88号，酒店旁有充电桩，20:00前收束</em></li>
+            </ol>
+            <p class="sleep">住：根河静林山庄酒店｜去哪儿已订</p>
+          </article>
+          <article class="day-card" data-day="12" data-risk="mid" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-11.jpg" alt="敖鲁古雅驯鹿与森林" />
+              <a href="https://www.chinaxiantour.com/media/2023/06/aoluguya-reindeer-village-banner.webp" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D12 · 10月4日 周日 · 国庆</div>
+            <h3>敖鲁古雅驯鹿、额尔古纳湿地、莫日格勒河回海拉尔</h3>
+            <p class="drive">高德约 308 km｜4小时59分</p>
+            <p>最后一个完整自驾日：从根河静林山庄酒店先去敖鲁古雅看驯鹿，再经额尔古纳湿地和莫日格勒河回隐居繁华庄园。今晚必须回到海拉尔机场附近，把航班风险清零。</p>
+            <ol class="day-plan" aria-label="D12时间安排">
+              <li><time>10:00</time><span>根河静林山庄酒店出发去敖鲁古雅</span><em>高德约4分钟，景区在根河市区西侧，很适合上午第一站</em></li>
+              <li><time>10:04</time><span>敖鲁古雅使鹿部落景区</span><em>约1小时45分钟，驯鹿投喂、白桦林和鄂温克使鹿文化</em></li>
+              <li><time>11:49</time><span>出发去额尔古纳湿地</span><em>高德约2小时08分，国庆返程车流预留余量</em></li>
+              <li><time>13:57</time><span>额尔古纳湿地景区</span><em>约1小时05分钟，高处看根河湿地秋色</em></li>
+              <li><time>15:08</time><span>额尔古纳市午餐</span><em>从湿地高德约6分钟，约45分钟，返海拉尔前最后一次舒适补给</em></li>
+              <li class="day-plan__optional"><time>备选</time><span>虚线支线：额尔古纳白桦林</span><em>额尔古纳市区后可绕白桦林景区再去莫日格勒河，高德约多1小时31分。它很适合金秋白桦，但会把回海拉尔推晚；若要去，建议缩短额尔古纳湿地或放弃莫日格勒深玩。</em></li>
+              <li><time>17:24</time><span>莫日格勒河观景点</span><em>从额尔古纳市区高德约1小时31分，约45分钟，草原曲水和秋季牧场</em></li>
+              <li><time>19:19</time><span>隐居繁华庄园入住</span><em>去哪儿已订；从莫日格勒河高德约1小时10分，晚上加满油，整理还车用品</em></li>
+            </ol>
+            <p class="sleep">住：隐居繁华庄园（海拉尔机场店）｜去哪儿已订</p>
+          </article>
+          <article class="day-card" data-day="13" data-risk="low" tabindex="0">
+            <figure class="day-photo">
+              <img src="./assets/day-photos/day-13.jpg" alt="海拉尔返程前城市与草原门户" />
+              <a href="https://k.sinaimg.cn/n/sinacn20190611s/403/w1200h803/20190611/b9c7-hyeztys6286070.jpg/w700d1q75cms.jpg" target="_blank" rel="noreferrer">图源</a>
+            </figure>
+            <div class="day-card__date">D13 · 10月5日 周一 · 国庆</div>
+            <h3>还车，海拉尔飞成都</h3>
+            <p class="drive">高德约 5 km｜10分钟</p>
+            <p>留足加油、洗车、还车验车和机场排队时间。中午航班建议上午10点前到达机场。</p>
+            <ol class="day-plan" aria-label="D13时间安排">
+              <li><time>08:30</time><span>隐居繁华庄园退房，确认遗留物品</span><em>相机、电池、证件、充电器逐项检查</em></li>
+              <li><time>09:00</time><span>加油、简洗、还车验车</span><em>约1小时，保留油票和车辆照片</em></li>
+              <li><time>10:00</time><span>出发去海拉尔机场</span><em>高德约10分钟，按租车点位置微调还车顺序</em></li>
+              <li><time>10:10</time><span>到达海拉尔机场</span><em>中午航班留足值机和安检时间</em></li>
+              <li><time>11:30</time><span>候机 / 返成都</span><em>具体以航班时间为准</em></li>
+            </ol>
+            <p class="sleep">返程：海拉尔机场</p>
+          </article>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section weather" id="weather">
+        <div class="section__header">
+          <p class="eyebrow">Weather & Packing</p>
+          <h2>9月底到10月初：一天四季，夜里入冬</h2>
+          <p>海拉尔9月底低温可接近0℃，根河、满归、漠河更冷。林区秋雨后可能出现霜冻、暗冰或短时降雪。</p>
+        </div>
+        <div class="weather-grid">
+          <article>
+            <h3>穿搭</h3>
+            <ul>
+              <li>打底速干 + 抓绒 + 薄羽绒 + 防风冲锋衣。</li>
+              <li>帽子、围巾、手套、防滑鞋要随手可拿。</li>
+              <li>满归、根河和漠河早晚很冷，睡衣和备用保暖层也要带够。</li>
+            </ul>
+          </article>
+          <article>
+            <h3>车辆</h3>
+            <ul>
+              <li>SUV更舒服，轿车可走但要慢；优先租带雪地胎或四季胎的车。</li>
+              <li>带防滑链、胎压表、拖车绳、应急启动电源和强光手电。</li>
+              <li>进入林区前确认玻璃水耐低温，雨刷状态正常。</li>
+            </ul>
+          </article>
+          <article>
+            <h3>导航与油量</h3>
+            <ul>
+              <li>海拉尔、阿尔山、满洲里、额尔古纳、根河、满归、漠河都要补油。</li>
+              <li>油量低于半箱就加满；林区不要赌下一个加油站。</li>
+              <li>提前下载离线地图，关键住宿和加油站收藏到两个地图App。</li>
+            </ul>
+          </article>
+          <article>
+            <h3>边境与防火</h3>
+            <ul>
+              <li>边境地带谨慎使用无人机，很多区域禁飞或需审批。</li>
+              <li>森林草原防火期不吸烟、不野炊、不点明火。</li>
+              <li>遇边防提示、临时封路或防火检查，以现场要求为准。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section booking" id="booking">
+        <div class="section__header">
+          <p class="eyebrow">Booking Strategy</p>
+          <h2>先锁小地方，后订大城市</h2>
+          <p>国庆期间真正紧张的不是海拉尔和满洲里，而是临江、室韦、莫尔道嘎、满归、根河这类房源少且选择有限的地方。</p>
+        </div>
+        <div class="booking-grid">
+          <div class="checklist">
+            <h3>优先预订</h3>
+            <label><input type="checkbox" checked /> 9月23日 初青·茶设计师酒店（海拉尔古城店）｜携程已订</label>
+            <label><input type="checkbox" checked /> 9月24日 扎兰屯柴河赫家酒店｜去哪儿已订</label>
+            <label><input type="checkbox" checked /> 9月25日 阿兰度森林温泉小镇｜抖音已订</label>
+            <label><input type="checkbox" checked /> 9月26日 维也纳智好酒店（满洲里中苏金街店）｜飞猪已订</label>
+            <label><input type="checkbox" checked /> 9月27日 向北方居·View star观星·原野美宿（黑山头镇店）｜携程已订</label>
+            <label><input type="checkbox" checked /> 9月28日 额尔古纳市室韦萨沙之家｜去哪儿已订</label>
+            <label><input type="checkbox" checked /> 9月29日 莫尔道嘎龙运宾馆｜去哪儿已订</label>
+            <label><input type="checkbox" checked /> 9月30日 满归镇佳辰宾馆｜去哪儿已订｜当日复查10月4日隐居繁华庄园价格，可免费退则降价重订</label>
+            <label><input type="checkbox" checked /> 10月1日 锦江之星酒店（漠河北极村中国最北邮局店）｜去哪儿已订</label>
+            <label><input type="checkbox" checked /> 10月2日 麗枫酒店（北极星广场松苑公园店）｜飞猪已订</label>
+            <label><input type="checkbox" checked /> 10月3日 根河静林山庄酒店｜去哪儿已订</label>
+            <label><input type="checkbox" checked /> 10月4日 隐居繁华庄园（海拉尔机场店）｜去哪儿已订</label>
+          </div>
+          <div class="fallback">
+            <h3>坏天气压缩方案</h3>
+            <p>
+              如果9月30日到10月3日出现明显降雪或道路结冰，优先把 D10 漠河大环压缩为“漠河市区 + 北极村一日往返”，龙江第一湾和北红村改为天气好再追加。
+            </p>
+            <p>
+              如果阿尔山段9月25日下雪或景区路况差，把阿尔山深度游改成半日，提前去满洲里，给后面林区多留半天缓冲。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section sources" id="sources">
+        <div class="section__header">
+          <p class="eyebrow">Sources</p>
+          <h2>参考资料</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://www.gov.cn/gongbao/2025/issue_12406/202511/content_7048922.html" target="_blank" rel="noreferrer">
+            国务院办公厅关于2026年部分节假日安排的通知
+          </a>
+          <a href="https://lbs.amap.com/api/javascript-api/guide/abc/load" target="_blank" rel="noreferrer">
+            高德地图 JSAPI 1.4：加载方式
+          </a>
+          <a href="https://lbs.amap.com/api/javascript-api/reference/route-search" target="_blank" rel="noreferrer">
+            高德地图 JSAPI 1.4：路径规划
+          </a>
+          <a href="https://weatherspark.com/m/134123/9/Average-Weather-in-September-in-Hailar-China" target="_blank" rel="noreferrer">
+            WeatherSpark：海拉尔9月平均天气
+          </a>
+          <a href="https://weatherspark.com/m/137658/9/Average-Weather-in-September-in-Genhe-China" target="_blank" rel="noreferrer">
+            WeatherSpark：根河9月平均天气
+          </a>
+          <a href="https://www.forestry.gov.cn/c/www/lcstly/644432.jhtml" target="_blank" rel="noreferrer">
+            国家林业和草原局：黑龙江“五花山”观赏季
+          </a>
+          <a href="https://www.forestry.gov.cn/lyj/1/kpzrbhd/20230905/521144.html" target="_blank" rel="noreferrer">
+            国家林草局：阿尔山国家森林公园
+          </a>
+          <a href="https://www.manzhouli.gov.cn/News/show/872614.html" target="_blank" rel="noreferrer">
+            满洲里市政府：边境线与186彩带河路线
+          </a>
+          <a href="https://gs.ctrip.com/html5/you/sight/newbaragleftbanner1446338/144741.html" target="_blank" rel="noreferrer">
+            携程：甘珠尔庙开放时间
+          </a>
+          <a href="https://gs.ctrip.com/html5/you/sight/newbaragleftbanner1446338/4511418.html" target="_blank" rel="noreferrer">
+            携程：诺门罕战役遗址陈列馆开放时间
+          </a>
+          <a href="https://livechina.cctv.com/live_zb/LIVE4293.html?pageid=4293&tag=MicroLiveType" target="_blank" rel="noreferrer">
+            CCTV直播中国：莫尔道嘎国家森林公园
+          </a>
+          <a href="https://gs.ctrip.com/html5/you/sight/ergun2026/70703.html" target="_blank" rel="noreferrer">
+            携程：莫尔道嘎国家森林公园季节开放提示
+          </a>
+          <a href="https://gs.ctrip.com/html5/you/sight/genhe2955/110153.html" target="_blank" rel="noreferrer">
+            携程：伊克萨玛国家森林公园
+          </a>
+          <a href="https://mohe.gov.cn/mohe/c101210/202307/c13_213612.shtml" target="_blank" rel="noreferrer">
+            漠河市政府：漠河深度游线路
+          </a>
+          <a href="https://gs.ctrip.com/html5/you/sight/mohe983/138300.html" target="_blank" rel="noreferrer">
+            携程：观音山采金小镇、胭脂沟与李金镛祠堂
+          </a>
+          <a href="https://bhl.triph.cn/" target="_blank" rel="noreferrer">
+            额尔古纳白桦林景区官方网站
+          </a>
+          <a href="https://gs.ctrip.com/html5/you/sight/ergun2026/140919.html" target="_blank" rel="noreferrer">
+            额尔古纳湿地景区：开放时间与游玩建议
+          </a>
+          <a href="https://gs.ctrip.com/html5/you/sight/genhe2955/1701408.html" target="_blank" rel="noreferrer">
+            敖鲁古雅使鹿部落：开放时间与游玩建议
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="#top">回到顶部</a>
+      <span>临行前7天重查天气、道路管制和景区营业时间。</span>
+    </footer>
+
+    <script src="./data/amap-driving-paths.js"></script>
+    <script src="./vendor/leaflet/leaflet.js"></script>
+    <script src="./script.js?v=20260826-static-map"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "key": "高德 Web端 JSAPI Key，用于加载地图底图",
+  "securityCode": "高德 JSAPI 安全密钥，可选",
+  "routeKey": "高德 Web服务 Key，必须开通路径规划2.0/驾车路线规划，用于真实道路路线"
+}

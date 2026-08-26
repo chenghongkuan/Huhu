@@ -1,0 +1,7 @@
+__pycache__/
+*.local.json
+desktop-*.png
+mobile-*.png
+route-*.png
+itinerary-*.png
+full-*.png

@@ -10,7 +10,7 @@ const stops = [
     lat: 49.211921,
   },
   { name: "扎兰屯柴河赫家酒店", lng: 121.314542, lat: 47.555256 },
-  { name: "阿尔山国家森林公园", lng: 120.3359, lat: 47.2964 },
+  { name: "阿尔山森林公园天池服务区", lng: 120.423638, lat: 47.300281 },
   { name: "阿兰度森林温泉小镇", lng: 120.195988, lat: 46.992306 },
   { name: "维也纳智好酒店（满洲里中苏金街店）", lng: 117.449421, lat: 49.589865 },
   {
@@ -29,8 +29,8 @@ const stops = [
     lat: 53.48039,
   },
   { name: "根河市静林山庄酒店", lng: 121.505775, lat: 50.775475 },
-  { name: "额尔古纳湿地", lng: 120.1739, lat: 50.2534 },
-  { name: "莫日格勒河", lng: 119.539, lat: 49.543 },
+  { name: "额尔古纳湿地景区（新入口）", lng: 120.146813, lat: 50.242355 },
+  { name: "莫日格勒河观景台（牧云山顶）", lng: 119.969455, lat: 49.603753 },
   { name: "隐居繁华庄园（海拉尔机场店）", lng: 119.794101, lat: 49.229181 },
 ];
 
@@ -49,18 +49,18 @@ const routeWaypoints = {
   hulunLakeGoldCoast: { name: "呼伦湖金海岸", lng: 116.973026, lat: 48.845359 },
   mammothPark: { name: "扎赉诺尔猛犸旅游景区", lng: 117.677857, lat: 49.498412 },
   guomen: { name: "满洲里国门景区", lng: 117.353708, lat: 49.630182 },
-  matryoshkaSquare: { name: "满洲里套娃广场", lng: 117.399369, lat: 49.612651 },
+  matryoshkaSquare: { name: "套娃广场正门停车场", lng: 117.401707, lat: 49.611216 },
   tengdaStable: { name: "腾达马场", lng: 119.553125, lat: 50.208575 },
   colorRiver186: { name: "186彩带河", lng: 119.034798, lat: 49.962573 },
-  heishantouSunset: { name: "黑山头日落观测点", lng: 119.532592, lat: 50.214262 },
+  heishantouSunset: { name: "黑山头日落山", lng: 119.554693, lat: 50.21621 },
   wulanshanStation: { name: "六卡乌兰山驿站", lng: 119.351776, lat: 50.614142 },
   wulanshan: { name: "乌兰山太极湾", lng: 119.39105, lat: 50.622386 },
   qika: { name: "七卡", lng: 119.530987, lat: 50.745489 },
   bakaiIsland: { name: "八卡岛", lng: 119.524622, lat: 50.903776 },
   jiuka: { name: "九卡", lng: 119.749176, lat: 51.056132 },
-  enheTownship: { name: "恩和俄罗斯族民族乡", lng: 119.91379, lat: 50.822878 },
+  enheTownship: { name: "恩和北山", lng: 119.909769, lat: 50.832647 },
   haurRiverScenicArea: { name: "哈乌尔河景区", lng: 120.03425, lat: 50.958544 },
-  shiweiPort: { name: "中国室韦口岸", lng: 119.895746, lat: 51.334108 },
+  shiweiPort: { name: "室韦边境口岸停车场", lng: 119.904825, lat: 51.342137 },
   eagleBeak: { name: "老鹰嘴", lng: 120.033336, lat: 51.49149 },
   moonPaozi: { name: "月亮泡子", lng: 120.100946, lat: 51.53213 },
   taipingVillage: { name: "太平村", lng: 120.271505, lat: 51.503768 },
@@ -183,7 +183,7 @@ const dayRoutes = {
     points: [stops[0], routeWaypoints.boketuStation, stops[1]],
   },
   3: {
-    label: "D3 柴河赫家酒店 - 十大湾 - 月亮天池 - 阿尔山国家森林公园 - 五里泉 - 阿尔山火车站 - 阿兰度森林温泉小镇",
+    label: "D3 柴河赫家酒店 - 十大湾 - 月亮天池 - 阿尔山森林公园天池服务区 - 五里泉 - 阿尔山火车站 - 阿兰度森林温泉小镇",
     points: [
       stops[1],
       routeWaypoints.chaiheBridge,
@@ -206,7 +206,7 @@ const dayRoutes = {
     ],
   },
   5: {
-    label: "D5 维也纳智好酒店 - 国门 - 套娃广场 - 186彩带河 - 腾达马场 - 向北方居",
+    label: "D5 维也纳智好酒店 - 国门 - 套娃广场正门停车场 - 186彩带河 - 腾达马场 - 向北方居",
     points: [
       stops[4],
       routeWaypoints.guomen,
@@ -217,7 +217,7 @@ const dayRoutes = {
     ],
   },
   6: {
-    label: "D6 向北方居 - 六卡乌兰山驿站 - 乌兰山 - 七卡 - 八卡岛 - 九卡 - 中国室韦口岸 - 室韦萨沙之家",
+    label: "D6 向北方居 - 六卡乌兰山驿站 - 乌兰山 - 七卡 - 八卡岛 - 九卡 - 室韦边境口岸停车场 - 室韦萨沙之家",
     points: [
       stops[5],
       routeWaypoints.wulanshanStation,
@@ -283,7 +283,7 @@ const dayRoutes = {
     ],
   },
   12: {
-    label: "D12 静林山庄酒店 - 敖鲁古雅 - 额尔古纳湿地 - 额尔古纳市区 - 莫日格勒河 - 隐居繁华庄园",
+    label: "D12 静林山庄酒店 - 敖鲁古雅 - 额尔古纳湿地景区（新入口） - 额尔古纳市区 - 莫日格勒河观景台（牧云山顶） - 隐居繁华庄园",
     points: [
       stops[12],
       routeWaypoints.aoluguya,
@@ -310,13 +310,13 @@ const optionalRouteBranches = [
   },
   {
     day: 5,
-    label: "可选支线：黑山头 - 日落观测点",
+    label: "可选支线：黑山头 - 黑山头日落山",
     points: [stops[5], routeWaypoints.heishantouSunset, stops[5]],
     color: "#d89731",
   },
   {
     day: 6,
-    label: "替代内线：七卡 - 恩和 - 哈乌尔河景区 - 室韦口岸",
+    label: "替代内线：七卡 - 恩和北山 - 哈乌尔河景区 - 室韦边境口岸停车场",
     points: [
       routeWaypoints.qika,
       routeWaypoints.enheTownship,
@@ -338,7 +338,7 @@ const optionalRouteBranches = [
   },
   {
     day: 12,
-    label: "可选支线：额尔古纳 - 白桦林 - 莫日格勒河",
+    label: "可选支线：额尔古纳 - 白桦林 - 莫日格勒河观景台（牧云山顶）",
     points: [routeWaypoints.ergunaCity, routeWaypoints.birchForest, stops[14]],
     color: "#c49a37",
   },
